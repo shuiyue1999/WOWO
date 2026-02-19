@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WOWO 校园请假系统</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    body {
+      background: #f5f7fa;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      background: #445239;
+      color: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+    .page {
+      display: none;
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    .page.active {
+      display: block;
+    }
+    .nav {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .nav button {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #e8edf2;
+      color: #555;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .nav button.active {
+      background: #824F4F;
+      color: white;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: #445239;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .card {
+      background: #f8f9fa;
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    .card h4 {
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>WOWO 校园请假系统</h1>
+    </header>
+
+    <div class="nav">
+      <button class="nav-btn active" data-page="workbench">工作台</button>
+      <button class="nav-btn" data-page="apply">请假申请</button>
+      <button class="nav-btn" data-page="record">请假记录</button>
+    </div>
+
+    <!-- 工作台 -->
+    <div id="workbench" class="page active">
+      <h2>工作台</h2>
+      <div class="card">
+        <h4>待审批请假</h4>
+        <p>当前有 2 条请假申请待你审批</p>
+      </div>
+      <div class="card">
+        <h4>我的请假</h4>
+        <p>本月已请假 1 天，剩余 4 天</p>
+      </div>
+    </div>
+
+    <!-- 请假申请 -->
+    <div id="apply" class="page">
+      <h2>请假申请</h2>
+      <form id="applyForm">
+        <div class="form-group">
+          <label>姓名</label>
+          <input type="text" placeholder="请输入你的姓名" required>
+        </div>
+        <div class="form-group">
+          <label>学号</label>
+          <input type="text" placeholder="请输入你的学号" required>
+        </div>
+        <div class="form-group">
+          <label>请假类型</label>
+          <select required>
+            <option value="">请选择</option>
+            <option value="sick">病假</option>
+            <option value="personal">事假</option>
+            <option value="other">其他</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>开始时间</label>
+          <input type="datetime-local" required>
+        </div>
+        <div class="form-group">
+          <label>结束时间</label>
+          <input type="datetime-local" required>
+        </div>
+        <div class="form-group">
+          <label>请假原因</label>
+          <textarea rows="4" placeholder="请详细说明请假原因" required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">提交申请</button>
+      </form>
+    </div>
+
+    <!-- 请假记录 -->
+    <div id="record" class="page">
+      <h2>请假记录</h2>
+      <div class="card">
+        <h4>2026-02-15 病假</h4>
+        <p>状态：已通过 | 时长：1天</p>
+      </div>
+      <div class="card">
+        <h4>2026-01-20 事假</h4>
+        <p>状态：已通过 | 时长：0.5天</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 切换页面
+    const navBtns = document.querySelectorAll('.nav-btn');
+    const pages = document.querySelectorAll('.page');
+
+    navBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // 切换按钮状态
+        navBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // 切换页面显示
+        const targetPage = btn.dataset.page;
+        pages.forEach(page => {
+          page.classList.remove('active');
+          if (page.id === targetPage) {
+            page.classList.add('active');
+          }
+        });
+      });
+    });
+
+    // 提交表单
+    document.getElementById('applyForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('请假申请已提交！');
+      // 这里可以添加提交到后端的逻辑
+    });
+  </script>
+</body>
+</html>
