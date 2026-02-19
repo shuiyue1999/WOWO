@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>请假信息</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+body {
+  background: #f5f7fa;
+}
+.header {
+  background: #2d6cdf;
+  color: white;
+  padding: 16px 15px;
+  text-align: center;
+  font-size: 20px;
+}
+.card {
+  background: white;
+  margin: 10px 15px;
+  border-radius: 10px;
+  padding: 15px;
+  position: relative;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 16px;
+}
+.row:last-child {
+  border-bottom: none;
+}
+.label {
+  color: #333;
+}
+.value {
+  color: #333;
+  text-align: right;
+  max-width: 60%;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+.stamp {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: 2px solid #999;
+  color: #999;
+  padding: 5px 10px;
+  transform: rotate(15deg);
+  font-size: 14px;
+  border-radius: 4px;
+}
+.reason {
+  line-height: 1.8;
+  padding: 10px 0;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+.attachments {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+.attachment {
+  position: relative;
+  width: 120px;
+  height: 80px;
+  background: #eee;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.attachment img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.attachment input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.approval {
+  margin-top: 20px;
+  padding-left: 20px;
+  border-left: 2px solid #2d6cdf;
+}
+.approval-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  position: relative;
+}
+.approval-item::before {
+  content: '';
+  position: absolute;
+  left: -26px;
+  top: 10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #2d6cdf;
+}
+.approval-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.approval-avatar input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.approval-info {
+  flex: 1;
+}
+.approval-name {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+.approval-time {
+  font-size: 14px;
+  color: #666;
+}
+.approval-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #2d6cdf;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+.tabs {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  border-top: 1px solid #eee;
+}
+.tab {
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+}
+.tab.active {
+  color: #2d6cdf;
+}
+[contenteditable] {
+  outline: 1px dashed transparent;
+  transition: outline-color 0.2s;
+}
+[contenteditable]:focus {
+  outline-color: #2d6cdf;
+}
+</style>
+</head>
+<body>
+<div class="header" contenteditable="true">我在校园</div>
+
+<div class="card">
+  <div class="stamp" contenteditable="true">进行中</div>
+  <div class="row">
+    <div class="label" contenteditable="true">当前状态</div>
+    <div class="value" contenteditable="true"></div>
+  </div>
+  <div class="row">
+    <div class="label" contenteditable="true">请假类型</div>
+    <div class="value" contenteditable="true">病假</div>
+  </div>
+  <div class="row">
+    <div class="label" contenteditable="true">开始时间</div>
+    <div class="value" contenteditable="true">2025-12-07 19:00</div>
+  </div>
+  <div class="row">
+    <div class="label" contenteditable="true">结束时间</div>
+    <div class="value" contenteditable="true">2025-12-08 15:13</div>
+  </div>
+  <div class="row">
+    <div class="label" contenteditable="true">紧急联系人电话</div>
+    <div class="value" contenteditable="true">13679240929</div>
+  </div>
+  <div class="row">
+    <div class="label" contenteditable="true">当前位置</div>
+    <div class="value" contenteditable="true">陕西省西安市雁塔区漳浒寨街道科技路</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="label" contenteditable="true">请假事由</div>
+  <div class="reason" contenteditable="true">
+敬的老师：我是汉语言文学专业20250112班(班级全程)学生王怡婷，现因急性肠胃炎，需要请假半天(外出),并按时(返校)后销假，并保证请假期间自觉做好个人防护，请假期间个人安全自负，望老师批准!
+  </div>
+</div>
+
+<div class="card">
+  <div class="row">
+    <div class="label" contenteditable="true">是否出校</div>
+    <div class="value" contenteditable="true">否</div>
+  </div>
+  <div class="row">
+    <div class="label" contenteditable="true">其他信息</div>
+    <div class="value" contenteditable="true"></div>
+  </div>
+  <div style="margin-top:10px;" contenteditable="true">1.附件上传</div>
+  <div class="attachments">
+    <div class="attachment">
+      <img id="attach1" src="https://picsum.photos/120/80" alt="附件1">
+      <input type="file" accept="image/*" onchange="changeAttach(1, this)">
+    </div>
+    <div class="attachment">
+      <img id="attach2" src="https://picsum.photos/120/80" alt="附件2">
+      <input type="file" accept="image/*" onchange="changeAttach(2, this)">
+    </div>
+  </div>
+  <div class="row" style="margin-top:15px;">
+    <div class="label" contenteditable="true">* 2.是否传染性疾病</div>
+    <div class="value" contenteditable="true">否</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="label" contenteditable="true">请假审批信息</div>
+  <div class="approval">
+    <div class="approval-item">
+      <div class="approval-avatar" style="background: #ff6699;">
+        <img id="stuAvatar" src="https://picsum.photos/40/40" alt="学生头像">
+        <input type="file" accept="image/*" onchange="changeStuAvatar(this)">
+      </div>
+      <div class="approval-info">
+        <div class="approval-name" contenteditable="true">王怡婷(学生)</div>
+        <div class="approval-time" contenteditable="true">发起审批: 2025-12-07 18:15</div>
+      </div>
+      <div class="approval-btn" contenteditable="true">我</div>
+    </div>
+    <div class="approval-item">
+      <div class="approval-avatar" style="background: #4298f3;">
+        <img id="teaAvatar" src="https://picsum.photos/40/40" alt="辅导员头像">
+        <input type="file" accept="image/*" onchange="changeTeaAvatar(this)">
+      </div>
+      <div class="approval-info">
+        <div class="approval-name" contenteditable="true">李鑫(辅导员)</div>
+        <div class="approval-time" contenteditable="true">已退回 2025-12-07 18:19</div>
+        <div class="approval-time" contenteditable="true" style="margin-top:5px;">已退回至学生。晚上不回学校，上传家长手写申请书</div>
+      </div>
+      <div class="approval-btn" contenteditable="true">✓</div>
+    </div>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" contenteditable="true">请假信息</div>
+  <div class="tab" contenteditable="true">延期信息</div>
+  <div class="tab" contenteditable="true">行程单</div>
+</div>
+
+<script>
+function changeAttach(id, input) {
+  const file = input.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      document.getElementById(`attach${id}`).src = e.target.result;
+      localStorage.setItem(`attach${id}`, e.target.result);
+    };
+    reader.readAsDataURL(file);
+  }
+}
+function changeStuAvatar(input) {
+  const file = input.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      document.getElementById('stuAvatar').src = e.target.result;
+      localStorage.setItem('stuAvatar', e.target.result);
+    };
+    reader.readAsDataURL(file);
+  }
+}
+function changeTeaAvatar(input) {
+  const file = input.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      document.getElementById('teaAvatar').src = e.target.result;
+      localStorage.setItem('teaAvatar', e.target.result);
+    };
+    reader.readAsDataURL(file);
+  }
+}
+window.onload = function() {
+  const saved = JSON.parse(localStorage.getItem('leaveInfoData') || '{}');
+  if (saved.attach1) document.getElementById('attach1').src = saved.attach1;
+  if (saved.attach2) document.getElementById('attach2').src = saved.attach2;
+  if (saved.stuAvatar) document.getElementById('stuAvatar').src = saved.stuAvatar;
+  if (saved.teaAvatar) document.getElementById('teaAvatar').src = saved.teaAvatar;
+  document.querySelectorAll('[contenteditable]').forEach(el => {
+    const key = 'leaveInfo_' + el.innerText.substring(0, 10);
+    const val = localStorage.getItem(key);
+    if (val) el.innerText = val;
+    el.addEventListener('input', () => {
+      localStorage.setItem(key, el.innerText);
+      saveAll();
+    });
+  });
+}
+function saveAll() {
+  const data = {
+    attach1: document.getElementById('attach1').src,
+    attach2: document.getElementById('attach2').src,
+    stuAvatar: document.getElementById('stuAvatar').src,
+    teaAvatar: document.getElementById('teaAvatar').src
+  };
+  localStorage.setItem('leaveInfoData', JSON.stringify(data));
+}
+</script>
+</body>
+</html>
